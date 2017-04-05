@@ -58,6 +58,6 @@ group :test do
   gem 'capybara'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'slenium=webdriver'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end
