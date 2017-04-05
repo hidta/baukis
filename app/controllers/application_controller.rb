@@ -4,8 +4,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   layout :set_layout
+  
+  class Forbidden < ActionController::ActionControllerError; end
+  class IpAddressRejected < ActionController::ActionControllerError; end
 
-  rescue_form Exception, with: :rescue500
+  rescue_form Exception,         with: :rescue500
+  rescue_form Forbidden,         with: :rescue403
+  rescue_form IpAddressRejected, with: :rescue403
 
   private
   
@@ -27,5 +32,10 @@ class ApplicationController < ActionController::Base
   #rescueはクラス・メソッド
   #例外が発生したらrescue500に処理を渡す
   #renderでerrors/internal_server_error.html.erbを生成して表示
+
+  def rescue403(e)
+    @exception = e
+    render 'errors/forbidden', status: 403
+  end
 
 end
