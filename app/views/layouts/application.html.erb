@@ -5,10 +5,15 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <!-->mediaはcssが適用される対象をしていている 適用対象が全てなのでallとなっている</!-->
 </head>
 <body>
-
-<%= yield %>
-
+  <div id="wrapper">
+    <%= render 'shared/header' %>
+    <div id="container">
+      <%= yield %>
+    </div>
+    <%= render 'shared/footer' %>
+  </div>
 </body>
 </html>
