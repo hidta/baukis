@@ -26,11 +26,14 @@ RSpec.configure do |config|
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
+  #create,build をテストの中で使用できるように定義
 
   config.before(:suite) do
     FactoryGirl.reload
   end
-  
+  #suite 前に実行する処理
+  #suiteとはrspecの実行対象となっているexampleの集合
+
   config.expect_with :rspec do |expectations|
     # This option will default to `true` in RSpec 4. It makes the `description`
     # and `failure_message` of custom matchers include text for helper methods
