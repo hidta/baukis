@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
+
+  namespace :staff do
+    root 'top#index'
+  end
+
+  namespace :admin do
+    root 'top#index'
+  end
+
+  namespace :customer do
+    root 'top#index'
+  end
+
+  root 'errors#routing_error'
+  get '*anything' => 'errots#routing_error'
+  
   # The priority is based upon order of creation: first created -> highest priority.
+
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
