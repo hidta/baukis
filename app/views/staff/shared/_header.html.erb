@@ -1,0 +1,12 @@
+<header>
+  <span class="logo-mark">
+    BAUKIS 
+  </span>
+  <%=
+    if current_staff_member
+      link_to 'logout', :staff_session, method: :delete
+     else
+      link_to 'login', :staff_login 
+    end
+  %>
+</header>
