@@ -19,14 +19,17 @@ class Staff::SessionsController < Staff::Base
       # sessionオブジェクトにstaffmemberのid属性の値をセット
       # sessionオブジェクトはリダレクト先でも参照できる
       # ;staff_member_idキーに値がセットされていることがログインしている状態を表す
+      flash.now.alert = " login success "
       redirect_to :staff_root
     else
+      flash.now.alert = " wrong emailadress or wrong password"
       render action: 'new'
     end
   end
 
   def destroy
     session.delete(:staff_member_id)
+    flash.notice = "logout"
     redirect_to :staff_root
   end
 
