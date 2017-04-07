@@ -16,17 +16,25 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+ENV['RAILS_ENV'] = 'test'
+require File.expand_path('../../config/environment', __FILE__)
+
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
 
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  #ロードするfixtureのパスを指定
   config.user_transactional_fixtures = true
+  #テスト内でデータをトランザクション処理するかどうかを指定
+  #yes なら、テスト内でのデータ操作がトランザクションの扱いになり、コミットするまでDBに保存されない。 no なら、トランザクション処理を行わず、INSERTしたタイミングでレコードが保存される。
   config.order = "random"
 
   config.include FactoryGirl::Syntax::Methods
   #create,build をテストの中で使用できるように定義
+
+  ActiveRecord::Migration.maintain_test_schema!
 
   config.before(:suite) do
     FactoryGirl.reload
