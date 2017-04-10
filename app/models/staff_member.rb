@@ -1,4 +1,4 @@
-class StaffMenber < ActiveRecord::Base
+class StaffMember < ActiveRecord::Base
   before_validation do
     self.email_for_index = email.downcase if email
   end
@@ -10,5 +10,4 @@ class StaffMenber < ActiveRecord::Base
       self.hashed_password = nil
     end
   end
-
 end
