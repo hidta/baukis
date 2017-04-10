@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   def routing_error
-    raise ActionController::RoutingError,
+    raise ActiveController::RoutingError,
       "No route matchs #{request.path.inspect}"
   end
   # raiseは第一引数に例外クラス、第二引数にメッセージを指定する
