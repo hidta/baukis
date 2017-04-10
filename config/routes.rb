@@ -1,18 +1,23 @@
 Rails.application.routes.draw do
 
-  namespace :staff do
-    root 'top#index'
-    get 'login'     => 'session#new', as: :login
-    post'session'   => 'session#create', as: :session
-    delete 'session' => 'session#destroy'
+  config = Rails.application.config.baukis
+
+  constraints host: config[:staff][:host] do
+    namespace :staff, path: config[:staff][:path] do
+      root 'top#index'
+      get 'login'     => 'session#new', as: :login
+      resources :session, only: [ :create, :destroy ]
+      resources :account, except: [ :new, :create, :destroy ]
+    end
   end
 
-  namespace :admin do
-    root 'top#index'
-    get 'login'     => 'session#new', as: :login
-    post'session'   => 'session#create', as: :session
-    delete 'session' => 'session#destroy'
-    resources :staff_members
+   constraints host: config[:admin][:host] do
+    namespace :staff, path: config[:admin][:path] do
+      root 'top#index'
+      get 'login'     => 'session#new', as: :login
+      resources :session, only: [ :create, :destroy ]
+      resources :staff_members
+    end
   end
 
   namespace :customer do
